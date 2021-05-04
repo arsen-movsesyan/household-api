@@ -1,3 +1,4 @@
+from django.urls import path, include
 from passman import views
 from rest_framework.routers import DefaultRouter
 
@@ -11,4 +12,7 @@ router.register(r'person-document', views.PersonDocumentViewSet, basename='perso
 router.register(r'account', views.AccountViewSet, basename='account'),
 router.register(r'recurring-account', views.RecurringAccountViewSet, basename='recurring-account'),
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('address-create/', views.AddressCreateView.as_view()),
+    path('', include(router.urls))
+]

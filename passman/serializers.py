@@ -1,50 +1,67 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from passman import models
 
 
-class PersonSerializer(ModelSerializer):
+class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Person
         fields = '__all__'
 
 
-class AddressSerializer(ModelSerializer):
+class AddressSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Address
         fields = '__all__'
 
 
-class VehicleSerializer(ModelSerializer):
+class AddressCreateSerializer(serializers.Serializer):
+    address_line1 = serializers.CharField()
+    address_line2 = serializers.CharField(allow_null=True, required=False)
+    apt_suite = serializers.CharField(allow_null=True, required=False)
+    city = serializers.CharField()
+    state = serializers.CharField()
+    zip_code = serializers.CharField()
+    period_start = serializers.DateField()
+    period_end = serializers.DateField(allow_null=True)
+
+    def create(self, validated_data):
+        return models.Address.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        pass
+
+
+class VehicleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Vehicle
         fields = '__all__'
 
 
-class PersonDocumentSerializer(ModelSerializer):
+class PersonDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.PersonDocument
         fields = '__all__'
 
 
-class AccountSerializer(ModelSerializer):
+class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Account
         fields = '__all__'
 
 
-class RecurringAccountSerializer(ModelSerializer):
+class RecurringAccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.RecurringAccount
         fields = '__all__'
 
 
-class RecurringAcknowledgementSerializer(ModelSerializer):
+class RecurringAcknowledgementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.RecurringAcknowledgement

@@ -1,6 +1,5 @@
 from dateutil.rrule import rrule, YEARLY, MONTHLY, WEEKLY, DAILY
 from django.db import models
-from django.utils import timezone
 from stdimage.models import StdImageField
 
 
@@ -11,6 +10,7 @@ class Person(models.Model):
     phone = models.CharField(max_length=10)
     ssn = models.CharField(max_length=9)
     dob = models.DateField()
+    retired = models.BooleanField(default=False)
 
 
 class Address(models.Model):
@@ -51,7 +51,7 @@ class Account(models.Model):
     account_name = models.CharField(max_length=255)
     account_url = models.URLField()
     created_date = models.DateField(auto_now_add=True)
-    register_date = models.DateField(default=timezone.now())
+    register_date = models.DateField(default='django.utils.timezone.now')
     description = models.TextField()
     password_value = models.CharField(max_length=255)
     extra_fields = models.JSONField(null=True)

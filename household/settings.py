@@ -136,3 +136,5 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
 }
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyD8ZVfwLdNouD9by7b_xtV4eqoOMjL3nQM'
