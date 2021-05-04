@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -137,4 +138,4 @@ REST_FRAMEWORK = {
     ),
 }
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyD8ZVfwLdNouD9by7b_xtV4eqoOMjL3nQM'
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")

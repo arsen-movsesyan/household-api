@@ -1,6 +1,7 @@
 from dateutil.rrule import rrule, YEARLY, MONTHLY, WEEKLY, DAILY
 from django.db import models
 from stdimage.models import StdImageField
+from passman.managers import MailingAddressManager
 
 
 class Person(models.Model):
@@ -18,7 +19,13 @@ class Address(models.Model):
     period_end = models.DateField(null=True)
     address_id = models.CharField(max_length=255)
     formatted_address = models.CharField(max_length=255)
-    comments = models.TextField(null=True)
+    apt_suite = models.CharField(max_length=255, null=True)
+    comment = models.TextField(null=True)
+
+    objects = MailingAddressManager()
+
+    class Meta:
+        ordering = ['period_start']
 
 
 class Vehicle(models.Model):

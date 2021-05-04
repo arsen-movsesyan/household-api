@@ -10,6 +10,10 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class AddressSerializer(serializers.ModelSerializer):
+    # address_line1 = serializers.CharField(required=False)
+    # city = serializers.CharField(required=False)
+    # state = serializers.CharField(required=False)
+    # zip_code = serializers.CharField(required=False)
 
     class Meta:
         model = models.Address
@@ -25,6 +29,7 @@ class AddressCreateSerializer(serializers.Serializer):
     zip_code = serializers.CharField()
     period_start = serializers.DateField()
     period_end = serializers.DateField(allow_null=True)
+    comment = serializers.CharField(allow_null=True, required=False)
 
     def create(self, validated_data):
         return models.Address.objects.create(**validated_data)

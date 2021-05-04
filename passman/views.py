@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import status
 from passman import serializers, models
-from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
+from household.views import UpdateDestroyOnlyViewSet
 
 
 class PersonViewSet(ModelViewSet):
@@ -15,9 +16,12 @@ class PersonViewSet(ModelViewSet):
         person.save()
 
 
-class AddressViewSet(ReadOnlyModelViewSet):
+class AddressViewSet(UpdateDestroyOnlyViewSet):
     serializer_class = serializers.AddressSerializer
     queryset = models.Address.objects.all()
+
+    # def update(self, request, *args, **kwargs):
+    #     pass
 
 
 class AddressCreateView(APIView):
@@ -27,7 +31,7 @@ class AddressCreateView(APIView):
         serializer.is_valid(raise_exception=True)
         address_data = serializer.validated_data
         obj = serializer.create(address_data)
-        ret_serializer = serializers.AddressSerializer(address_data)
+        ret_serializer = serializers.AddressSerializer(obj)
         return Response(ret_serializer.data, status=status.HTTP_201_CREATED)
 
 
