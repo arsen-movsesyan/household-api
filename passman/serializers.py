@@ -10,10 +10,6 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class AddressSerializer(serializers.ModelSerializer):
-    # address_line1 = serializers.CharField(required=False)
-    # city = serializers.CharField(required=False)
-    # state = serializers.CharField(required=False)
-    # zip_code = serializers.CharField(required=False)
 
     class Meta:
         model = models.Address
@@ -52,11 +48,37 @@ class PersonDocumentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AccountExtraSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.AccountExtra
+        fields = ['id', 'parameter', 'value', 'comment']
+
+
 class AccountSerializer(serializers.ModelSerializer):
+    extra_fields = AccountExtraSerializer(many=True)
 
     class Meta:
         model = models.Account
         fields = '__all__'
+
+    def create(self, validated_data):
+        extra_fields = validated_data.pop('extra_fields')
+        instance = super(AccountSerializer, self).create(validated_data)
+        AccountSerializer._create_extra_fields(instance, extra_fields)
+        return instance
+
+    def update(self, instance, validated_data):
+        extra_fields = validated_data.pop('extra_fields')
+        instance = super(AccountSerializer, self).update(instance, validated_data)
+        instance.extra_fields.all().delete()
+        AccountSerializer._create_extra_fields(instance, extra_fields)
+        return instance
+
+    @staticmethod
+    def _create_extra_fields(instance, extra_fields):
+        for extra in extra_fields:
+            instance.extra_fields.create(**extra)
 
 
 class RecurringAccountSerializer(serializers.ModelSerializer):

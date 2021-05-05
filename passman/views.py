@@ -20,9 +20,6 @@ class AddressViewSet(UpdateDestroyOnlyViewSet):
     serializer_class = serializers.AddressSerializer
     queryset = models.Address.objects.all()
 
-    # def update(self, request, *args, **kwargs):
-    #     pass
-
 
 class AddressCreateView(APIView):
 

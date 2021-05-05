@@ -58,10 +58,16 @@ class Account(models.Model):
     account_name = models.CharField(max_length=255)
     account_url = models.URLField()
     created_date = models.DateField(auto_now_add=True)
-    register_date = models.DateField(default='django.utils.timezone.now')
     description = models.TextField()
+    username_value = models.CharField(max_length=255)
     password_value = models.CharField(max_length=255)
-    extra_fields = models.JSONField(null=True)
+
+
+class AccountExtra(models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='extra_fields')
+    parameter = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
+    comment = models.TextField(null=True)
 
 
 frequency_choices = [
