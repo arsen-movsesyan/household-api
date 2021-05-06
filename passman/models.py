@@ -62,6 +62,9 @@ class Account(models.Model):
     username_value = models.CharField(max_length=255)
     password_value = models.CharField(max_length=255)
 
+    class Meta:
+        ordering = ['-created_date']
+
 
 class AccountExtra(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='extra_fields')
