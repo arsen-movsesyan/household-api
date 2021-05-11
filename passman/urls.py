@@ -14,5 +14,6 @@ router.register(r'recurring-account', views.RecurringAccountViewSet, basename='r
 
 urlpatterns = [
     path('address-create/', views.AddressCreateView.as_view()),
+    path('constants/', views.get_constants),
     path('', include(router.urls))
 ]

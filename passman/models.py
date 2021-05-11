@@ -86,6 +86,7 @@ class RecurringAccount(models.Model):
     frequency = models.IntegerField(choices=frequency_choices, default=MONTHLY)
     extra_params = models.JSONField(null=True)
     acknowledge_required = models.BooleanField(default=True)
+    comment = models.TextField(null=True)
 
     def get_next_occurrence(self):
         try:
@@ -105,3 +106,18 @@ class RecurringAcknowledgement(models.Model):
     amount = models.DecimalField(decimal_places=2, max_digits=8, null=True)
     acknowledge_value = models.CharField(max_length=255, null=True)
     comment = models.TextField(null=True)
+
+
+recurring_extras = [
+    'dtstart',
+    'interval',
+    'wkst',
+    'count',
+    'until',
+    'bysetpos',
+    'bymonth',
+    'bymonthday',
+    'byyearday',
+    'byweekno',
+    'byweekday'
+]

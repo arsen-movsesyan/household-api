@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 from passman import serializers, models
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
@@ -55,3 +56,12 @@ class RecurringAccountViewSet(ModelViewSet):
 class RecurringAcknowledgementViewSet(ModelViewSet):
     serializer_class = serializers.RecurringAcknowledgementSerializer
     queryset = models.RecurringAcknowledgement.objects.all()
+
+
+@api_view(http_method_names=['GET'])
+def get_constants(request):
+    obj = {
+        'extras': models.recurring_extras,
+        'frequencies': models.frequency_choices
+    }
+    return Response(obj, status=status.HTTP_200_OK)
