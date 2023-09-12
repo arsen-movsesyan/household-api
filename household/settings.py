@@ -57,18 +57,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'household.wsgi.application'
 
+DOCKER = os.environ.get("DOCKER")
+
+INSIDE_DOCKER = True if DOCKER == 'Yes' else False
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+if INSIDE_DOCKER:
+    host_ip = "host.docker.internal"
+else:
+    host_ip = "127.0.0.1"
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': "household",
-        'HOST': "127.0.0.1",
+        'HOST': host_ip,
         'USER': "household_connect",
         'PASSWORD': 'test123',
-        'PORT': 5431
+        'PORT': 5432
     }
 }
 
