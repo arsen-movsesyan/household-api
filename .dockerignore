@@ -2,5 +2,5 @@
 .gitignore
 .idea
 playground
-Dockerfile
 .DS_Store
+docker/

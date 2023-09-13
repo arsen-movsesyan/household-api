@@ -11,7 +11,8 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:4200",
-    "http://localhost:4200"
+    "http://localhost:4200",
+    "http://web:4200"
 ]
 
 INSTALLED_APPS = [
@@ -59,12 +60,12 @@ WSGI_APPLICATION = 'household.wsgi.application'
 
 DOCKER = os.environ.get("DOCKER")
 
-INSIDE_DOCKER = True if DOCKER == 'Yes' else False
+INSIDE_DOCKER = True if DOCKER == '1' else False
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 if INSIDE_DOCKER:
-    host_ip = "host.docker.internal"
+    host_ip = "postgres"
 else:
     host_ip = "127.0.0.1"
 
