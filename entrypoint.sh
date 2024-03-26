@@ -24,9 +24,7 @@ until postgres_ready; do
 done
 >&2 echo "PostgreSQL is available"
 
-python manage.py makemigrations
 python manage.py migrate
-# python config/appliance_initials.py
 python manage.py runserver 0.0.0.0:8000
 
 exec "$@"

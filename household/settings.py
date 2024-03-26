@@ -12,7 +12,11 @@ ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:4200",
     "http://localhost:4200",
-    "http://web:4200"
+    "http://127.0.0.1",
+    "http://localhost",
+    "http://web:4200",
+    "http://web",
+
 ]
 
 INSTALLED_APPS = [
@@ -58,7 +62,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'household.wsgi.application'
 
-DOCKER = os.environ.get("DOCKER")
+DOCKER = os.environ.get("DOCKER", False)
 
 INSIDE_DOCKER = True if DOCKER == '1' else False
 
@@ -66,9 +70,10 @@ INSIDE_DOCKER = True if DOCKER == '1' else False
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 if INSIDE_DOCKER:
     host_ip = "postgres"
+    host_port = 5432
 else:
     host_ip = "127.0.0.1"
-
+    host_port = 5433
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -76,7 +81,7 @@ DATABASES = {
         'HOST': host_ip,
         'USER': "household_connect",
         'PASSWORD': 'test123',
-        'PORT': 5432
+        'PORT': host_port
     }
 }
 
