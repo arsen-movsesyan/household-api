@@ -1,11 +1,11 @@
 FROM python:3.11-slim
 LABEL authors="arsen_movsesyan"
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DOCKER Yes
-ENV PYTHONPATH .
-ENV DJANGO_SETTINGS_MODULE household.settings
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DOCKER=Yes
+ENV PYTHONPATH=.
+ENV DJANGO_SETTINGS_MODULE=household.settings
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

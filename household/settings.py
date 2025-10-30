@@ -69,7 +69,7 @@ INSIDE_DOCKER = True if DOCKER == '1' else False
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 if INSIDE_DOCKER:
-    host_ip = "postgres"
+    host_ip = "household-postgres"
     host_port = 5432
 else:
     host_ip = "127.0.0.1"
