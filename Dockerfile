@@ -1,24 +1,24 @@
-FROM python:3.11-slim
+FROM python:3.14-slim
 LABEL authors="arsen_movsesyan"
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV DOCKER=Yes
-ENV PYTHONPATH=.
-ENV DJANGO_SETTINGS_MODULE=household.settings
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        postgresql-client
+WORKDIR /app
 
-COPY requirements.txt /opt
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev gcc && \
+    rm -rf /var/lib/apt/lists/*
 
-WORKDIR /opt
-RUN pip install --upgrade setuptools
-RUN pip install -r requirements.txt
+
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY .. .
 
+RUN python manage.py collectstatic --noinput 2>/dev/null || true
+RUN chmod +x /app/entrypoint.sh
+
 EXPOSE 8000
 
-ENTRYPOINT ["sh", "entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]

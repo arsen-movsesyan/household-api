@@ -3,8 +3,6 @@
 import datetime
 from django.db import migrations, models
 import django.db.models.deletion
-from django.utils.timezone import utc
-import stdimage.models
 
 
 class Migration(migrations.Migration):
@@ -22,7 +20,7 @@ class Migration(migrations.Migration):
                 ('account_name', models.CharField(max_length=255)),
                 ('account_url', models.URLField()),
                 ('created_date', models.DateField(auto_now_add=True)),
-                ('register_date', models.DateField(default=datetime.datetime(2021, 4, 29, 19, 2, 48, 831968, tzinfo=utc))),
+                ('register_date', models.DateField(default=datetime.datetime(2021, 4, 29, 19, 2, 48, 831968, tzinfo=datetime.timezone.utc))),
                 ('description', models.TextField()),
                 ('password_value', models.CharField(max_length=255)),
                 ('extra_fields', models.JSONField(null=True)),
@@ -82,7 +80,7 @@ class Migration(migrations.Migration):
                 ('document_name', models.CharField(max_length=255)),
                 ('issue_date', models.DateField(null=True)),
                 ('expiration_date', models.DateField(null=True)),
-                ('scan_image', stdimage.models.StdImageField(upload_to='')),
+                ('scan_image', models.ImageField(upload_to='documents/')),
                 ('is_active', models.BooleanField(default=True)),
                 ('comment', models.TextField(null=True)),
                 ('person', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='my_documents', to='passman.person')),

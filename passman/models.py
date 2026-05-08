@@ -1,6 +1,5 @@
 from dateutil.rrule import rrule, YEARLY, MONTHLY, WEEKLY, DAILY
 from django.db import models
-from stdimage.models import StdImageField
 from passman.managers import MailingAddressManager
 
 
@@ -45,11 +44,7 @@ class PersonDocument(models.Model):
     document_name = models.CharField(max_length=255)
     issue_date = models.DateField(null=True)
     expiration_date = models.DateField(null=True)
-    scan_image = StdImageField(
-        variations={
-            'thumbnail': (100, 70, True),
-        },
-        delete_orphans=True)
+    scan_image = models.ImageField(upload_to='documents/')
     is_active = models.BooleanField(default=True)
     comment = models.TextField(null=True)
 

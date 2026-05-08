@@ -1,9 +1,12 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-#i987&0i!2k8+lqmv-^!jpfone!@5)boewx(t(2p6s8sy$ik_6'
+load_dotenv(BASE_DIR / ".local.env")
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "change-me-in-production")
 
 DEBUG = True
 
@@ -62,26 +65,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'household.wsgi.application'
 
-DOCKER = os.environ.get("DOCKER", False)
-
-INSIDE_DOCKER = True if DOCKER == '1' else False
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if INSIDE_DOCKER:
-    host_ip = "household-postgres"
-    host_port = 5432
-else:
-    host_ip = "127.0.0.1"
-    host_port = 5433
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "household",
-        'HOST': host_ip,
-        'USER': "household_connect",
-        'PASSWORD': 'test123',
-        'PORT': host_port
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("POSTGRESQL_DB", "household_db"),
+        'HOST': os.environ["POSTGRESQL_HOST"],
+        'USER': os.getenv("POSTGRESQL_USER","household_admin"),
+        'PASSWORD': os.environ["POSTGRESQL_PASSWORD"],
+        'PORT': os.environ["POSTGRESQL_PORT"],
     }
 }
 
@@ -89,21 +80,21 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
-#
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -113,8 +104,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
@@ -130,9 +119,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_MODEL_SERIALIZER_CLASS':
-        'rest_framework.serializers.HyperlinkedModelSerializer',
-
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),

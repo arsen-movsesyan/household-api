@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: household-pg
+    environment:
+      - POSTGRES_USER=${POSTGRESQL_USER:-household_db}
+      - POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD:-test123}
+      - POSTGRES_DB=${POSTGRESQL_DB:-household_admin}
+    restart: always
+    volumes:
+      - ./db-data/postgres:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRESQL_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRESQL_USER:-household_admin}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
