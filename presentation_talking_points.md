@@ -54,3 +54,7 @@ Tasks are kept small deliberately — because without precise definitions, givin
 3. Add rate limiting and abuse protection
 
 Each task is larger but fully defined — scope boundaries, token lifetime, rate limits, error responses, and acceptance criteria are all documented before work begins. No guessing, no back-and-forth.
+
+## 5. Conclusion
+
+Once implemented, the standards and prompts can follow a familiar override hierarchy — the same pattern seen in systems like `.gitignore` or `CLAUDE.md`. There are global standards that apply universally, project-level overrides that tailor them to a specific codebase or domain, and local overrides for team- or task-specific adjustments. Each level inherits from the one above and can refine without breaking the whole.
