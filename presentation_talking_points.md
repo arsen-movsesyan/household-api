@@ -58,3 +58,13 @@ Each task is larger but fully defined — scope boundaries, token lifetime, rate
 ## 5. Conclusion
 
 Once implemented, the standards and prompts can follow a familiar override hierarchy — the same pattern seen in systems like `.gitignore` or `CLAUDE.md`. There are global standards that apply universally, project-level overrides that tailor them to a specific codebase or domain, and local overrides for team- or task-specific adjustments. Each level inherits from the one above and can refine without breaking the whole.
+
+## 6. What's Not Covered
+
+Several topics are deliberately left for future discussion:
+
+**Measuring throughput and calibration.** The capacity formulas use Individual Throughput (I) and Team Throughput (T) as inputs, but how do we measure them in practice? How does AI-assisted development change these values? How do we calibrate them over time — and what does the retrospective process look like after each delivery cycle?
+
+**Prompt design.** The framework depends on two AI prompts — one for defining tasks with acceptance criteria, and one for reviewing deliverables against those criteria. The actual design of these prompts — structure, required context, iteration patterns — is its own body of work that follows once the standards are defined.
+
+**Extension to higher hierarchy levels.** This presentation focused on the lowest level (individual tasks) as the most tangible starting point. The same method should extend upward — to epics, milestones, and full project scope — but each level will require its own adapted standards and prompt variations.
