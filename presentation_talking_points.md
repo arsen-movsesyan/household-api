@@ -1,14 +1,33 @@
-# AI-Assisted Development Workflow — Talking Points
+# AI-Assisted Development Workflow
 
-## 0. Introduction
+## Brief
+
+The main idea is a framework where AI is used not to replace developers, but to enforce documentation discipline at every level of the software development hierarchy.
+The key insight: AI's greatest leverage is in elevating the quality of planning and definition upstream, not in accelerating the coding itself.
+
+The two-part structure:
+
+  1. Planning and defining — AI helps document each work item per universal standards: clear scope, measurable acceptance criteria, dependencies, and risks.
+  2. Implementation and review — AI helps verify the deliverable against those same standards, producing criterion-by-criterion acceptance decisions.
+
+The central thesis (the "Virtuous Circle"):
+  Well-defined tasks let developers take on bigger scope reliably.
+  Bigger scope means fewer breakdown levels.
+  Fewer levels means simpler planning.
+  Simpler planning means even better definitions.
+Each rotation amplifies the next — exponential, not linear.
+
+---
+
+## Introduction
 
 There is a known and widespread fear — present at almost every level of the management hierarchy, from software engineers to near-top management — that AI will replace humans, especially in the software engineering industry. The idea I want to present today attempts to show the opposite. It is possible to use AI to significantly speed up the entire software development cycle — not just the coding, but planning, review, and delivery — without eliminating a single person.
 
-## 1. The Second Problem
+## The Second Problem
 
 Inefficient management — poor planning, vague requirements, endless review loops — is an extremely common condition. It is not limited to the lowest development level; it exists across all levels of the hierarchy. This is the second problem this idea aims to solve. The same framework that accelerates delivery also enforces clarity and structure at every level — reducing the opportunity for inefficiency to compound as work flows through the organization.
 
-## 2. The Core Idea
+## The Core Idea
 
 Use AI to enforce documentation standards at every level of the software development cycle. When planning produces a breakdown — at any level — each resulting piece gets wrapped into a properly defined description with measurable, achievable acceptance criteria. Each of those pieces in turn breaks down further into smaller parts under the same conditions, all the way down to the individual task assigned to a single contributor.
 
@@ -17,7 +36,7 @@ AI is involved twice at every level: first, to help define and document each pie
 Here is why: when tasks are well-defined and acceptance criteria are clear, an individual developer — especially with AI-assisted planning and execution — can reliably take on a much larger scope of work. Larger individual scope means the project requires fewer breakdown levels and fewer total pieces. Fewer pieces means simpler planning. Simpler planning means better definitions. And the cycle accelerates. This creates what I call a Virtuous Circle — a self-reinforcing loop where each rotation amplifies the next, producing exponential rather than linear improvement in delivery speed.
 
 
-## 3. How to Implement (High Level)
+## How to Implement (High Level)
 
 Let's take the lowest and most tangible level as an example: planning broken down into individual tasks. The implementation requires two things:
 
@@ -32,7 +51,7 @@ This can be achieved in two ways:
 
 **Approach B — From one project to common rules.** Start with a specific project, prepare the prompts for it directly, and use them in practice. Then apply to the next project, adapt what doesn't fit, and observe what changed. Iteratively refine through successive projects until the standards and prompts converge into something universal — not by upfront design, but through practical use.
 
-## 4. Example — The Difference in Practice
+## Example — The Difference in Practice
 
 **Example task:** Add password reset functionality (email-based, with expiring token).
 
@@ -55,16 +74,14 @@ Tasks are kept small deliberately — because without precise definitions, givin
 
 Each task is larger but fully defined — scope boundaries, token lifetime, rate limits, error responses, and acceptance criteria are all documented before work begins. No guessing, no back-and-forth.
 
-## 5. Conclusion
+## Conclusion
 
 Once implemented, the standards and prompts can follow a familiar override hierarchy — the same pattern seen in systems like `.gitignore` or `CLAUDE.md`. There are global standards that apply universally, project-level overrides that tailor them to a specific codebase or domain, and local overrides for team- or task-specific adjustments. Each level inherits from the one above and can refine without breaking the whole.
 
 ## 6. What's Not Covered
 
-Several topics are deliberately left for future discussion:
+Several topics are deliberately left for future:
 
-**Measuring throughput and calibration.** The capacity formulas use Individual Throughput (I) and Team Throughput (T) as inputs, but how do we measure them in practice? How does AI-assisted development change these values? How do we calibrate them over time — and what does the retrospective process look like after each delivery cycle?
+**Individual's and team's throughput measuring.** This topic is directly related to the discussed idea, but due to its complexity it is left for separate discussion. I have dedicated research in progress on this subject, but it remains out of scope here.
 
-**Prompt design.** The framework depends on two AI prompts — one for defining tasks with acceptance criteria, and one for reviewing deliverables against those criteria. The actual design of these prompts — structure, required context, iteration patterns — is its own body of work that follows once the standards are defined.
-
-**Extension to higher hierarchy levels.** This presentation focused on the lowest level (individual tasks) as the most tangible starting point. The same method should extend upward — to epics, milestones, and full project scope — but each level will require its own adapted standards and prompt variations.
+**Multi-agent development.** The standards-driven approach applies identically: each agent still works against defined scope and measurable criteria, whether there is one or ten. The scale is larger, the orchestration is more complex, but the core mechanics — standards in, structured output out, review against criteria — do not change. Multi-agent development is by itself a topic for separate research, comparable in complexity to the framework presented here, and is out of scope of the current idea.
