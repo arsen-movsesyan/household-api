@@ -1,0 +1,5 @@
+In any software project, large goals are broken into smaller tasks that individual developers work on. The most common source of wasted time is not slow coding — it's vague task descriptions. When a developer doesn't know exactly what "done" looks like, they guess. The guess gets rejected in review. They try again. This cycle repeats.
+
+The idea: use AI to write precise, measurable descriptions for every task before work begins — what exactly needs to be built, what's included, what's not, and how to verify the result. Then, when the work is delivered, use AI again to check it against those same descriptions.
+
+When tasks are described this way, developers finish faster, reviewers accept faster, and less work gets thrown away. This creates a compounding effect — each cycle of the project runs faster and smoother than the previous one.
